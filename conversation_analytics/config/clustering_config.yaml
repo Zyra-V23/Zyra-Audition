@@ -2,34 +2,36 @@
 # This configuration file contains parameters for HDBSCAN-based clustering
 # and temporal-semantic analysis of conversations.
 
-# HDBSCAN Parameters
-# These parameters control the density-based clustering algorithm
+# HDBSCAN Configuration
 hdbscan:
-  min_cluster_size: 2      # Mantener en 2 para capturar conversaciones pequeñas
-  min_samples: 1           # Reducido para ser más flexible en la formación de clusters
-  cluster_selection_epsilon: 0.35  # Ajustado para balance entre cohesión y número de clusters
+  min_cluster_size: 2      # Keep at 2 to capture small conversations
+  min_samples: 1           # Reduced to be more flexible in cluster formation
+  cluster_selection_epsilon: 0.35  # Adjusted for balance between cohesion and number of clusters
   metric: 'precomputed'    # Use pre-computed similarity matrix
 
-# Temporal-Semantic Weighting Parameters
-# Controls how time and content similarity are balanced
-temporal:
-  time_weight: 0.4         # Aumentado para dar más peso a la proximidad temporal
-  max_time_gap: 3600      # Reducido a 1 hora para separar mejor las conversaciones
-  similarity_threshold: 0.6  # Aumentado para crear conversaciones más distintas
+# Time-based Weighting
+time_weighting:
+  enabled: true
+  time_weight: 0.4         # Increased to give more weight to temporal proximity
+  decay_factor: 0.8
+  similarity_threshold: 0.6  # Increased to create more distinct conversations
+
+# Text Processing
+text_processing:
+  min_df: 1              # Keep at 1 for rare terms
+  max_df: 0.95           # Adjusted for better term coverage
+  ngram_range: [1, 2]
 
 # Vector Processing Parameters
 # Controls how message vectors are processed before clustering
 vectors:
   normalize: true         # Keep vectors normalized
   use_idf: true          # Use IDF weighting
-  min_df: 1              # Mantener en 1 para términos raros
-  max_df: 0.95           # Ajustado para mejor cobertura de términos
 
-# Outlier Handling Parameters
-# Controls how messages that don't fit well into clusters are handled
-outliers:
-  reassignment_threshold: 0.55  # Más estricto para evitar agrupaciones incorrectas
-  max_outlier_ratio: 0.25    # Reducido para forzar más agrupaciones
+# Cluster Refinement
+refinement:
+  reassignment_threshold: 0.55  # More strict to avoid incorrect groupings
+  max_outlier_ratio: 0.25    # Reduced to force more groupings
 
 # Performance Optimization
 # Parameters for optimizing clustering performance

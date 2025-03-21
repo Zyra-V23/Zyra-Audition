@@ -51,6 +51,20 @@ def generate_output_filename(input_file: str) -> str:
     
     return str(output_path)
 
+def load_messages(input_file: str) -> List[Dict[str, Any]]:
+    """Load messages from CSV file."""
+    messages = []
+    with open(input_file, 'r', encoding='utf-8') as f:  # Key change here!
+        reader = csv.DictReader(f)
+        for row in reader:
+            messages.append({
+                'id': row['message_id'],
+                'timestamp': row['timestamp'],
+                'user': {'username': row['user']},
+                'text': row['text']
+            })
+    return messages
+
 class Message:
     def __init__(self, id: str, text: str, timestamp: str, user: Dict[str, str]):
         self.id = id
@@ -102,7 +116,7 @@ class MistralConversationDetector:
     def load_messages(self, input_file: str) -> List[Message]:
         """Load messages from CSV file."""
         messages = []
-        with open(input_file, 'r') as f:
+        with open(input_file, 'r', encoding='utf-8') as f:  # ¡Cambio clave aquí!
             reader = csv.DictReader(f)
             for row in reader:
                 user = {
@@ -336,4 +350,4 @@ if __name__ == '__main__':
     
     # Save results
     detector.save_labels(labels, output_path)
-    logger.info(f"Results written to: {output_path}") 
+    logger.info(f"Results written to: {output_path}")

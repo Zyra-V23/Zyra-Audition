@@ -14,18 +14,19 @@
 
 # Model Configuration
 model:
-  names: ["phi:latest", "llama2:latest", "codellama:latest"]  # List of models to use
-  temperature: 0.3  # Reduced for more focused outputs
-  max_tokens: 1000
-  top_p: 0.95  # Slightly increased for better sampling
+  # Using models with best performance based on previous tests
+  names: ["deepseek-coder:latest"]  # Model optimized for code and analysis
+  temperature: 0.1  # Reduced for more deterministic responses
+  max_tokens: 1500  # Increased to allow more complete responses
+  top_p: 0.9  # Adjusted for better balance
 
 # Prompt Configuration
 prompt:
-  path: "open_source_examples/prompts/*"  # Test all available prompts
+  path: "open_source_examples/prompts/CD_prompt_mejorado.txt"  # Using the improved prompt
 
 # Automation Configuration
 automation:
-  enabled: true  # Enable automated testing
+  enabled: true  # Keep automated testing enabled
   parallel: false
 
 # Output Configuration
@@ -37,9 +38,9 @@ output:
 
 # Processing Configuration
 processing:
-  batch_size: 8  # Reduced for better stability
-  max_context_messages: 7  # Increased for better context
-  min_confidence_threshold: 0.75  # Increased for higher quality predictions
+  batch_size: 6  # Reduced for better stability and precision
+  max_context_messages: 10  # Increased to provide more context
+  min_confidence_threshold: 0.8  # Increased for higher quality
 
 # GPU Configuration
 gpu:
