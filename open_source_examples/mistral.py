@@ -297,7 +297,7 @@ No headers, no quotes, no additional text."""
     def _create_analysis_prompt(self, messages: List[Dict[str, Any]]) -> str:
         """Create the analysis prompt for Mistral."""
         # Load the conversation detection prompt template
-        prompt_path = os.path.join(os.path.dirname(__file__), 'open_source_examples/prompts/conversation_detection_prompt.txt')
+        prompt_path = os.path.join(os.path.dirname(__file__), 'prompts/conversation_detection_prompt.txt')
         with open(prompt_path, 'r') as f:
             prompt_template = f.read()
             

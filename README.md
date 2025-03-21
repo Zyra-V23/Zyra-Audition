@@ -1,3 +1,5 @@
+Use this as a prompt to determine each time where we are at the general process timeline and align the work we doing with this:
+
 # Conversation Analysis Tests with LLMs - Test Suite
 
 ## Table of Contents

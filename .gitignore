@@ -38,6 +38,17 @@ env/
 ENV/
 .env/
 .venv/
+hackathon_env/
+
+# Project specific
+conversation_analytics_output/
+vectorization_output/
+similarity_output/
+output/
+resultados_analisis/
+*.png
+data/groups/*/labels_*
+data/groups/*/processed_*
 
 # Node.js
 node_modules/
@@ -97,4 +108,13 @@ Thumbs.db
 # Optional: Uncomment if using Ruby
 # *.gem
 # *.rbc
-# .bundle/ 
+# .bundle/
+
+# Model files and cache
+models/
+*.onnx
+*.pt
+*.pth
+*.h5
+*.model
+*.bin 

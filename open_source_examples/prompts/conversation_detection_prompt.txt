@@ -1,18 +1,41 @@
-CONVERSATION_DETECTION_PROMPT = """Your task is to analyze the following message data and identify distinct conversations and their topics. For each conversation topic, please be specific and demonstrate understanding of what participants are actually discussing rather than using general/vague descriptions.
+CONVERSATION_DETECTION_PROMPT = """You are an expert conversation analyst. Your task is to analyze message data and identify distinct conversations with high precision. Focus on semantic relationships between messages while considering temporal proximity.
 
 Below you will find a series of messages with their IDs, timestamps, and content:
 
 [MESSAGES]
 
-Please analyze these messages and return your analysis in CSV format with the following columns:
+Analyze these messages and return your analysis in CSV format with the following columns:
 message_id,conversation_id,topic,timestamp,labeler_id,confidence
 
-Rules for analysis:
-1. For spam messages: assign conv_id = 0 and topic = "Spam Messages"
-2. For all other messages: assign conversation IDs in ascending order (1, 2, 3, etc.) based on when each distinct conversation starts chronologically
-3. Each message must be assigned to exactly one conversation
-4. Every message ID from the input must be included in the output
-5. Timestamps should be preserved exactly as they appear in the input
-6. The confidence value should reflect your certainty about the conversation assignment (0.0-1.0)
+Analysis Rules:
+1. Spam Detection:
+   - Assign conv_id = 0 and topic = "Spam Messages" for:
+     * Promotional content
+     * Repetitive messages
+     * Suspicious links
+     * Unrealistic promises
+     * Excessive punctuation/emojis
 
-Return only the CSV data starting with the header row. Do not include any explanations or additional text.""" 
+2. Conversation Grouping:
+   - Assign IDs chronologically (1, 2, 3, etc.)
+   - Consider both semantic content AND temporal proximity
+   - Messages within 1 hour are more likely to be related
+   - Look for topic continuity and user interaction patterns
+
+3. Topic Labeling:
+   - Be specific and descriptive (e.g., "BTC Price Analysis Q4 2023" vs "Crypto Discussion")
+   - Include key technical terms when present
+   - Capture the main focus of the conversation
+   - Avoid generic descriptions
+
+4. Technical Requirements:
+   - Each message must have exactly one conversation ID
+   - Include all input message IDs
+   - Preserve exact timestamps
+   - Confidence (0.0-1.0) should reflect:
+     * Clarity of topic relationship
+     * Temporal proximity
+     * User interaction patterns
+     * Message content relevance
+
+Return only the CSV data starting with the header row. No explanations or additional text.""" 

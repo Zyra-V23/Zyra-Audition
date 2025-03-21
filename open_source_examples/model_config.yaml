@@ -14,36 +14,35 @@
 
 # Model Configuration
 model:
-  names: ["phi:latest", "llama2:latest"]  # List of models to use (must be pulled via ollama first!)
-  temperature: 0.7
+  names: ["phi:latest", "llama2:latest", "codellama:latest"]  # List of models to use
+  temperature: 0.3  # Reduced for more focused outputs
   max_tokens: 1000
-  top_p: 0.9
+  top_p: 0.95  # Slightly increased for better sampling
 
 # Prompt Configuration
 prompt:
-  path: "open_source_examples/prompts/conversation_detection_prompt.txt"  # Path to the prompt file or directory (use * for all prompts)
-  # Example for all prompts: "open_source_examples/prompts/*"
+  path: "open_source_examples/prompts/*"  # Test all available prompts
 
 # Automation Configuration
 automation:
-  enabled: false  # Whether to run automated testing across all model+prompt combinations
-  parallel: false  # Whether to run combinations in parallel (future feature)
+  enabled: true  # Enable automated testing
+  parallel: false
 
 # Output Configuration
 output:
-  format: "csv"  # Output format (csv, json)
-  include_confidence: true  # Whether to include confidence scores
-  timestamp_format: "%Y%m%d_%H%M%S"  # Format for timestamp in output filenames
-  output_dir: "data/groups"  # Base directory for output files
+  format: "csv"
+  include_confidence: true
+  timestamp_format: "%Y%m%d_%H%M%S"
+  output_dir: "data/groups"
 
 # Processing Configuration
 processing:
-  batch_size: 10  # Number of messages to process in each batch
-  max_context_messages: 5  # Number of previous messages to include for context
-  min_confidence_threshold: 0.7  # Minimum confidence score to accept a prediction
+  batch_size: 8  # Reduced for better stability
+  max_context_messages: 7  # Increased for better context
+  min_confidence_threshold: 0.75  # Increased for higher quality predictions
 
 # GPU Configuration
 gpu:
-  enabled: true  # Whether to use GPU acceleration
-  auto_select: true  # Automatically select least utilized GPU
-  fallback_to_cpu: true  # Fall back to CPU if no GPU is available 
+  enabled: true
+  auto_select: true
+  fallback_to_cpu: true 
